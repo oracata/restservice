@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neusoft.icelake.modules.standard.dao.IWholeQuantityDao">
+	<resultMap id="EmpResultMap"
+		type="com.neusoft.icelake.modules.standard.entity.Emp">
+		<id column="accno" property="accno" jdbcType="VARCHAR" />
+		<result column="truename" property="truename" jdbcType="VARCHAR" />
+		<result column="gender" property="gender" jdbcType="VARCHAR" />
+		<result column="office_mail" property="office_mail" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="dp_id" property="dp_id" jdbcType="VARCHAR" />
+		<result column="person_sort" property="person_sort" jdbcType="VARCHAR" />
+		<result column="del_tag" property="del_tag" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="OrgResultMap"
+		type="com.neusoft.icelake.modules.standard.entity.Org">
+		<id column="child_id" property="child_id" jdbcType="VARCHAR" />
+		<result column="child_desc" property="child_desc" jdbcType="VARCHAR" />
+		<result column="child_short" property="child_short" jdbcType="VARCHAR" />
+		<result column="parent_id" property="parent_id" jdbcType="VARCHAR" />
+		<result column="parent_desc" property="parent_desc" jdbcType="VARCHAR" />
+		<result column="org_sort" property="org_sort" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Emp_Column_List">
+		accno, truename, gender, office_mail, title, dp_id,
+		person_sort, del_tag
+	</sql>
+	<sql id="Org_Column_List">
+		parent_id, parent_desc, child_id, child_desc, child_short,
+		org_sort
+	</sql>
+	<select id="getEmpAll" resultMap="EmpResultMap">
+		select
+		<include refid="Emp_Column_List" />
+		from v_person
+	</select>
+	<select id="getOrgAll" resultMap="OrgResultMap">
+		select
+		<include refid="Org_Column_List" />
+		from v_sap_org_node
+	</select>
+</mapper>
